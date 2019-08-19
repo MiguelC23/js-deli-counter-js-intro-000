@@ -1,40 +1,41 @@
 var katzDeli = [];
 
-function takeANumber(currentLine, name){
-var placeInLine = currentLine.length + 1;
-var outputString = “Welcome, ” + name +”. You are number ” + placeInLine + ” in line.”;
-currentLine.push(name);
-return outputString;
-}
-
-function nowServing(currentLine){
-var outputString;
-if (currentLine.length === 0){
-outputString = “There is nobody waiting to be served!”
-}
-else{
-outputString = “Currently serving ” + currentLine[0] + “.”;
-currentLine.shift();
-}
-return outputString;
-}
-
 function currentLine(line){
-var outputString;
-if (line.length === 0){
-outputString = “The line is currently empty.”
+  if(!line.length) {
+    return "The line is currently empty.";
+  }
+  var lineNamesandNumbers = [];
+  
+  for(var i=0; i<line.length; i++) {
+    lineNamesandNumbers.push(i+1 + ". "+ line[i]);
+  }
+  console.log("The line is currently: " + lineNamesandNumbers)
+  return "The line is currently: " + lineNamesandNumbers.join(', ');
 }
-else{
-outputString = “The line is currently: ”
-for(var i = 0; i < line.length ; i++){
-if (i === 0){
 
-outputString = outputString + (i+1) + “. ” + line[i];
+function nowServing(line) {
+  if(!line.length) {
+    console.log("There is nobody waiting to be served!")
+    return "There is nobody waiting to be served!"
+  } else {
+    //console.log("Currently serving " + line.shift());
+    return "Currently serving " + line.shift();
+  }
 }
-else{
-outputString = outputString + “, ” + (i+1) + “. ” + line[i];
+
+function takeANumber(line, name){
+  line.push(name);
+  
+  console.log("Welcome, " + name + ". You are number " + line.length + " in line.");
+  
+  return "Welcome, " + name + ". You are number " + line.length + " in line."
 }
-}
-}
-return outputString;
-}
+takeANumber(katzDeli, "Ada")
+takeANumber(katzDeli, "Grace")
+takeANumber(katzDeli, "Kent")
+currentLine(katzDeli);
+nowServing(katzDeli);
+takeANumber(katzDeli, "Matz"); 
+currentLine(katzDeli); 
+nowServing(katzDeli);
+currentLine(katzDeli)
